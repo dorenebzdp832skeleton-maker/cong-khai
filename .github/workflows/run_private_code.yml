@@ -185,7 +185,7 @@ jobs:
           [ -z "$TOKEN" ] && { echo "::warning::Không có token có quyền ghi. Bỏ qua commit."; exit 0; }
 
           FILES=""
-          for f in links_done.csv promptdalay.cvs tieudedalay.csv; do
+          for f in links_done.csv promptdalay.csv tieudedalay.csv; do
             [ -f "$f" ] && FILES="$FILES $f"
             [ -n "$DIR_FOUND" ] && [ -f "$DIR_FOUND/$f" ] && FILES="$FILES $DIR_FOUND/$f"
           done
@@ -200,7 +200,7 @@ jobs:
 
           git add -- $FILES
           git diff --cached --quiet && { echo "[INFO] Không có thay đổi."; exit 0; }
-          git commit -m "ci(state): update promptdalay.cvs, links_done.csv, tieudedalay.csv"
+          git commit -m "ci(state): update promptdalay.csv, links_done.csv, tieudedalay.csv"
           git push origin HEAD:"${PRIVATE_REF}"
 
       # Commit & PUSH 3 CSV về repo PRIVATE qua SSH (nếu checkout bằng SSH)
@@ -224,7 +224,7 @@ jobs:
           printf "Host github.com\n  StrictHostKeyChecking accept-new\n" >> ~/.ssh/config
 
           FILES=""
-          for f in promptdalay.cvs links_done.csv tieudedalay.csv; do
+          for f in promptdalay.csv links_done.csv tieudedalay.csv; do
             [ -f "$f" ] && FILES="$FILES $f"
             [ -n "$DIR_FOUND" ] && [ -f "$DIR_FOUND/$f" ] && FILES="$FILES $DIR_FOUND/$f"
           done
@@ -239,5 +239,5 @@ jobs:
 
           git add -- $FILES
           git diff --cached --quiet && { echo "[INFO] Không có thay đổi."; exit 0; }
-          git commit -m "ci(state): update promptdalay.cvs, links_done.csv, tieudedalay.csv"
+          git commit -m "ci(state): update promptdalay.csv, links_done.csv, tieudedalay.csv"
           git push origin HEAD:"${PRIVATE_REF}"
